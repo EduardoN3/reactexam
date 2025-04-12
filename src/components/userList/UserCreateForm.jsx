@@ -91,7 +91,7 @@ const UserCreateForm = ({ onCreate, checkEmailExists }) => {
                 </div>
                 <div className="action-buttons">
                     <button type="submit" className="primary-btn">Registrarse</button>
-                    <button type="button" onClick={handleCancel} className="secondary-btn">Limpiar Formulario</button>
+                    
                 </div>
             </form>
         </div>
