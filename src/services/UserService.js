@@ -1,4 +1,4 @@
-const BASE_URL = "http://44.202.157.173/users/";
+const BASE_URL = "https://44.202.157.173/users/";
 const CHECK_EMAIL_URL = "https://44.202.157.173/users/check-email";
 const LOGIN_URL = "https://44.202.157.173/users/login";
 
