@@ -1,122 +1,168 @@
-/* Estilos generales */
-.app-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-/* Formularios de autenticación */
-.auth-form {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.auth-form h2 {
+.App {
   text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Centrado de contenido en toda la página */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #c8c8c8;
+  min-height: 100vh;
+  margin-top: 0;
+  /* Asegura que el contenido empiece desde arriba */
+  scroll-behavior: smooth;
+  /* Suaviza el desplazamiento al cargar la página */
+}
+
+/* Estilo para los encabezados */
+h1 {
+  font-size: 2.5em;
   margin-bottom: 20px;
   color: #333;
+  font-weight: 600;
 }
 
-.auth-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
+p {
+  font-size: 1.2em;
+  margin-top: 10px;
+  color: #666;
 }
 
-.auth-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.register-link {
-  margin-top: 15px;
-  text-align: center;
-}
-
-.register-button {
-  background: none;
-  border: none;
-  color: #2196F3;
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0;
-  font-size: inherit;
-}
-
-/* Tabla de usuarios */
-.user-table-container {
-  margin-top: 30px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-/* Botones de acción */
-.actions {
-  display: flex;
-  gap: 10px;
-}
-
+/* Estilos generales para los botones */
 button {
-  padding: 6px 12px;
+  padding: 12px 25px;
+  font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.2s ease;
+  margin: 10px 0;
+  /* Reduce el espaciado entre los botones */
+  width: 220px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.edit-button {
-  background-color: #2196F3;
-  color: white;
+/* Efecto hover para los botones */
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-.delete-button {
-  background-color: #f44336;
-  color: white;
-}
-
-.save-button {
+/* Estilos de botones de login y registro */
+.register-link {
   background-color: #4CAF50;
   color: white;
 }
 
-button:hover {
-  opacity: 0.9;
+.register-link:hover {
+  background-color: #45a049;
 }
 
-/* Inputs en modo edición */
-input[type="text"],
-input[type="email"] {
-  padding: 6px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+.back-to-login {
+  background-color: #000000;
+  color: white;
+}
+
+.back-to-login:hover {
+  background-color: #c30101;
+}
+
+/* Estilo para el botón de logout */
+.logout-button {
+  background-color: #007BFF;
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para los formularios */
+input,
+select,
+textarea {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
   width: 100%;
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Diseño de la lista de usuarios */
+.users-list {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+.users-list th,
+.users-list td {
+  padding: 12px;
+  text-align: left;
+}
+
+.users-list th {
+  background-color: #007BFF;
+  color: white;
+}
+
+.users-list tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.users-list tr:hover {
+  background-color: #f1f1f1;
 }

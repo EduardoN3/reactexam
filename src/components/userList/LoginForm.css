@@ -1,0 +1,143 @@
+/* Contenedor principal */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Tarjeta de autenticación */
+.auth-card {
+    background-color: #fffcfc;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+    backdrop-filter: blur(10px);
+}
+
+/* Animación suave de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Título y subtítulo */
+.auth-title {
+    margin: 0;
+    font-size: 30px;
+    color: #2d3436;
+    font-weight: bold;
+}
+
+.auth-subtitle {
+    margin: 8px 0 24px;
+    font-size: 15px;
+    color: #636e72;
+}
+
+/* Mensaje de error */
+.auth-error {
+    background-color: #ffebee;
+    color: #d32f2f;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+/* Formulario */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Campos de entrada */
+.auth-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dfe6e9;
+    border-radius: 12px;
+    padding: 12px 15px;
+    background-color: #f5f6fa;
+    transition: box-shadow 0.3s ease;
+}
+
+.auth-input:focus-within {
+    box-shadow: 0 0 8px rgba(162, 155, 254, 0.4);
+    border-color: #a29bfe;
+}
+
+.auth-input input {
+    border: none;
+    outline: none;
+    flex: 1;
+    background: transparent;
+    font-size: 16px;
+    color: #2d3436;
+}
+
+.auth-icon {
+    margin-right: 10px;
+    color: #636e72;
+    font-size: 18px;
+}
+
+/* Botón */
+.auth-button {
+    background: linear-gradient(to right, #6a89cc, #82ccdd);
+    color: #fff;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.auth-button:hover {
+    background: linear-gradient(to right, #4a69bd, #60a3bc);
+    transform: scale(1.02);
+}
+
+/* Pie de formulario */
+.auth-footer {
+    margin-top: 24px;
+    font-size: 14px;
+    color: #636e72;
+}
+
+.auth-link {
+    background: none;
+    border: none;
+    color: #0984e3;
+    margin-left: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+    color: #0652dd;
+}
