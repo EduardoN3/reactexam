@@ -70,7 +70,7 @@ const App = () => {
               <button onClick={() => navigate('/users/create')} className="create-user-button">
                 Crear Nuevo Usuario
               </button>
-              <button onClick={redirectToDocs} className="docs-button">Ver Documentación de la API</button>
+              
               <center>
                 <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
               </center>
