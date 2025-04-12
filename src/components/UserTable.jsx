@@ -1,50 +1,131 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserTable = () => {
-const [users, setUsers] = useState([]);
-const [search, setSearch] = useState("");
+    const [users, setUsers] = useState([]);
+    const [editingId, setEditingId] = useState(null);
+    const [formData, setFormData] = useState({ name: '', email: '' });
+    const navigate = useNavigate();
 
-useEffect(() => {
-    // Llamada a la API de EC2
-    fetch('https://44.202.157.173/users') 
-    .then(response => response.json())
-    .then(data => setUsers(data))
-    .catch((err) => console.error("Error fetching users:", err));
-}, []);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        fetch('https://44.202.157.173/users/', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        })
+            .then(res => res.json())
+            .then(data => setUsers(data))
+            .catch(err => console.error('Error:', err));
+    }, []);
 
-const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(search.toLowerCase())
-);
+    const handleDelete = async (id) => {
+        if (!window.confirm('¿Eliminar usuario?')) return;
+        try {
+            const token = localStorage.getItem('token');
+            await fetch(`https://44.202.157.173/users/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+            setUsers(users.filter(user => user.id !== id));
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
-return (
-    <div className="p-4">
-    <input
-        type="text"
-        placeholder="Buscar usuario..."
-        className="border p-2 mb-4 w-full"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-    />
-    <table className="w-full border-collapse border border-gray-400">
-        <thead>
-        <tr className="bg-gray-200">
-            <th className="border p-2">Nombre</th>
-            <th className="border p-2">Email</th>
-            <th className="border p-2">Apellido</th>
-        </tr>
-        </thead>
-        <tbody>
-        {filteredUsers.map((user, index) => (
-            <tr key={index} className="border">
-            <td className="border p-2">{user.name}</td>
-            <td className="border p-2">{user.email}</td>
-            <td className="border p-2">{user.last_name}</td>
-            </tr>
-        ))}
-        </tbody>
-    </table>
-    </div>
-);
+    const handleEdit = (user) => {
+        setEditingId(user.id);
+        setFormData({ name: user.name, email: user.email });
+    };
+
+    const handleUpdate = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`https://44.202.157.173/users/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                setUsers(users.map(user =>
+                    user.id === id ? { ...user, ...formData } : user
+                ));
+                setEditingId(null);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    return (
+        <div className="user-table-container">
+            <h2>Lista de Usuarios</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map(user => (
+                        <tr key={user.id}>
+                            <td>
+                                {editingId === user.id ? (
+                                    <input
+                                        type="text"
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    />
+                                ) : (
+                                    user.name
+                                )}
+                            </td>
+                            <td>
+                                {editingId === user.id ? (
+                                    <input
+                                        type="email"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    />
+                                ) : (
+                                    user.email
+                                )}
+                            </td>
+                            <td className="actions">
+                                {editingId === user.id ? (
+                                    <button
+                                        onClick={() => handleUpdate(user.id)}
+                                        className="save-button"
+                                    >
+                                        Guardar
+                                    </button>
+                                ) : (
+                                    <>
+                                        <button
+                                            onClick={() => handleEdit(user)}
+                                            className="edit-button"
+                                        >
+                                            Editar
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(user.id)}
+                                            className="delete-button"
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 };
 
 export default UserTable;
